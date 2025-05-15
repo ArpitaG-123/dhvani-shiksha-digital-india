@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,8 +9,8 @@ import Index from "./pages/Index";
 import Welcome from "./pages/Welcome";
 import SubjectsPage from "./pages/SubjectsPage";
 import SubjectDetailPage from "./pages/SubjectDetailPage";
-import ChapterDetailPage from "./pages/ChapterDetailPage";
 import NotFound from "./pages/NotFound";
+// import AIToolsAndEdTechUpdates from "./pages/AIToolsAndEdTechUpdates";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +26,7 @@ const App = () => (
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/subjects" element={<SubjectsPage />} />
             <Route path="/subject/:subjectId" element={<SubjectDetailPage />} />
-            <Route path="/chapter/:chapterId" element={<ChapterDetailPage />} />
+            {/* <Route path="/ai-edtech" element={<AIToolsAndEdTechUpdates />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
