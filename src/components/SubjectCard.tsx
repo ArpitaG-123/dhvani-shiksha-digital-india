@@ -17,7 +17,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ subject }) => {
   };
 
   return (
-    <Card className={`${subject.color} bg-opacity-10 border-l-4 ${subject.color} card-hover`}>
+    <Card className={`border-l-4 ${subject.color} ${subject.color.replace('bg-', 'bg-opacity-10')} card-hover`}>
       <CardHeader className="pb-2">
         <div className="flex items-center space-x-2">
           <span className="text-2xl">{subject.icon}</span>
