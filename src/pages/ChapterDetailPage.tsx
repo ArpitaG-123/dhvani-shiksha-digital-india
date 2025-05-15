@@ -1,16 +1,20 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
 import ChapterContent from '@/components/ChapterContent';
+import ContentGenerator from '@/components/ContentGenerator';
 import { useStudent } from '@/contexts/StudentContext';
 import { chapters, subjects } from '@/data/subjectsData';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Book, Wand2 } from 'lucide-react';
 
 const ChapterDetailPage: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
   const { student } = useStudent();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<'content' | 'generator'>('content');
 
   useEffect(() => {
     if (!student) {
@@ -71,7 +75,26 @@ const ChapterDetailPage: React.FC = () => {
             </p>
           </div>
           
-          <ChapterContent chapter={foundChapter} subjectColor={subject.color} />
+          <Tabs defaultValue="content" value={activeTab} onValueChange={(v) => setActiveTab(v as 'content' | 'generator')} className="mb-6">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="content" className="flex items-center justify-center space-x-2">
+                <Book className="h-4 w-4" />
+                <span>Chapter Content</span>
+              </TabsTrigger>
+              <TabsTrigger value="generator" className="flex items-center justify-center space-x-2">
+                <Wand2 className="h-4 w-4" />
+                <span>Content Generator</span>
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="content" className="mt-4">
+              <ChapterContent chapter={foundChapter} subjectColor={subject.color} />
+            </TabsContent>
+            
+            <TabsContent value="generator" className="mt-4 animate-fade-in">
+              <ContentGenerator />
+            </TabsContent>
+          </Tabs>
           
           <div className="mt-8 grid grid-cols-2 gap-4">
             <Button variant="outline">Previous Chapter</Button>
